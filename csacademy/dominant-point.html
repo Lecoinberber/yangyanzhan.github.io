@@ -1,19 +1,23 @@
-<head><title>erase extremes</title>
+<head><title>dominant point</title>
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
 <script src="/third-party/highlight/highlight.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<h2>Yanzhan's solution for "erase extremes"</h2>
+<h2>Yanzhan's solution for "dominant point"</h2>
 <ul>
 <li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
 <li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
 </ul>
 
-            <div>
-            </div>
-        
+        <h3>
+            description:
+        </h3>
+        <div style="border: dotted; padding: 10px;">
+            You are given N points in the cartesian plane. For each point i you know its coordinates x_i and y_iy. We say that a point i dominates a point j if x_i > x_j and y_i > y_j. Find out if there is a point that dominates all the others.
+        </div>
+    
 
             <div>
             </div>
@@ -57,23 +61,39 @@ using namespace std;
 typedef long long ll;
 int main() {
     ios::sync_with_stdio(false);
-    ll n;
+    int n;
     cin >> n;
-    vector&lt;ll> nums(n);
-    for (ll i = 0; i &lt; n; i++) {
-        cin >> nums[i];
-    }
-    auto pair = minmax_element(nums.begin(), nums.end());
-    ll mini = *pair.first;
-    ll maxi = *pair.second;
-    ll res = 0;
-    for (ll i = 0; i &lt; n; i++) {
-        auto num = nums[i];
-        if (num != mini && num != maxi) {
-            res += num;
+    vector&lt;vector<int>> coords(n);
+    int maxi_x = numeric_limits&lt;int>::min();
+    int cnt_x = 0;
+    int idx_x = -1;
+    int maxi_y = numeric_limits&lt;int>::min();
+    int cnt_y = 0;
+    int idx_y = -1;
+    for (int i = 0; i &lt; n; i++) {
+        int x, y;
+        cin >> x >> y;
+        coords[i] = vector&lt;int>{x, y};
+        if (x > maxi_x) {
+            maxi_x = x;
+            cnt_x = 1;
+            idx_x = i;
+        } else if (x == maxi_x) {
+            cnt_x++;
+        }
+        if (y > maxi_y) {
+            maxi_y = y;
+            cnt_y = 1;
+            idx_y = i;
+        } else if (y == maxi_y) {
+            cnt_y++;
         }
     }
-    cout &lt;< res << endl;
+    if (cnt_x == 1 && cnt_y == 1 && idx_x == idx_y) {
+        cout &lt;< (idx_x + 1) << endl;
+    } else {
+        cout &lt;< -1 << endl;
+    }
     return 0;
 }
 </code></pre>
