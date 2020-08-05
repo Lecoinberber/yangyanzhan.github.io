@@ -1,0 +1,102 @@
+<head><title>falling leaves</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "falling leaves"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+        <h3>
+            description:
+        </h3>
+        <div style="border: dotted; padding: 10px;">
+            There is a cat on the x-axis. The cat can start running from the origin towards infinity at an integer moment between [0, T-1], at a speed of C units/second.
+There are also N leaves, for the i^th  leaf you know its position (x_i, y_i) in the plane. Each leaf will start to fall vertically at time 0 at a speed of S_i units/second.
+We say the i^th leaf hits that cat if the cat is at coordinate x_i at the exact moment when the leaf touches the axis.
+For each integer starting moment between 0 and T-1, find the number of leaves that will hit the cat.
+        </div>
+    
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;algorithm>
+#include &lt;bitset>
+#include &lt;chrono>
+#include &lt;cmath>
+#include &lt;cstdlib>
+#include &lt;deque>
+#include &lt;functional>
+#include &lt;iomanip>
+#include &lt;iostream>
+#include &lt;list>
+#include &lt;map>
+#include &lt;numeric>
+#include &lt;queue>
+#include &lt;regex>
+#include &lt;set>
+#include &lt;sstream>
+#include &lt;stack>
+#include &lt;string>
+#include &lt;thread>
+#include &lt;tuple>
+#include &lt;unordered_map>
+#include &lt;unordered_set>
+#include &lt;utility>
+#include &lt;vector>
+// #include &lt;execution>
+#include &lt;exception>
+using namespace std;
+typedef long long ll;
+int main() {
+    ios::sync_with_stdio(false);
+    int t, c, n;
+    cin >> t >> c >> n;
+    map&lt;int, int> cache;
+    for (int i = 0; i &lt; n; i++) {
+        int x, y, s;
+        cin >> x >> y >> s;
+        double t1 = x / (c + 0.0);
+        double t2 = y / (s + 0.0);
+        double t3 = t2 - t1;
+        if (t3 &lt; 0) {
+            continue;
+        }
+        int t = round(t3);
+        if ((ll)(t * c + x) * s == (ll)y * c) {
+            if (cache.find(t) == cache.end()) {
+                cache[t] = 0;
+            }
+            cache[t]++;
+        }
+    }
+    for (int i = 0; i &lt; t; i++) {
+        if (cache.find(i) != cache.end()) {
+            cout &lt;< cache[i] << endl;
+        } else {
+            cout &lt;< 0 << endl;
+        }
+    }
+    return 0;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/csacademy" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>
