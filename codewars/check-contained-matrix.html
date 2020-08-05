@@ -1,0 +1,70 @@
+<head><title>check contained matrix</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "check contained matrix"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;iostream>
+void check_is_contained(int **mat1, const int mat2[3][3], const int nrows,
+                        const int ncols, int &row, int &col) {
+    for (int i = 0; i &lt; nrows; i++) {
+        if (nrows - i &lt; 3) {
+            break;
+        }
+        for (int j = 0; j &lt; ncols; j++) {
+            if (ncols - j &lt; 3) {
+                break;
+            }
+            bool found = true;
+            for (int i1 = 0; i1 &lt; 3; i1++) {
+                for (int j1 = 0; j1 &lt; 3; j1++) {
+                    if (mat1[i1 + i][j1 + j] != mat2[i1][j1]) {
+                        found = false;
+                        break;
+                    }
+                }
+                if (!found) {
+                    break;
+                }
+            }
+            if (found) {
+                row = i;
+                col = j;
+                return;
+            }
+        }
+    }
+    row = -1;
+    col = -1;
+    return;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codewars" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

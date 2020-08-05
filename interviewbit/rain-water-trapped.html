@@ -1,0 +1,53 @@
+<head><title>rain water trapped</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "rain water trapped"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int Solution::trap(const vector&lt;int> &A) {
+    int n = A.size();
+    int left[n], right[n];
+    left[0] = A[0];
+    for (int i = 1; i &lt; n; i++) {
+        left[i] = max(left[i - 1], A[i]);
+    }
+    right[n - 1] = A[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+        right[i] = max(right[i + 1], A[i]);
+    }
+    int sum = 0;
+    for (int i = 0; i &lt; n; i++) {
+        sum += min(left[i], right[i]) - A[i];
+    }
+    return sum;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

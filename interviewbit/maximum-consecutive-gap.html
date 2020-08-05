@@ -1,0 +1,66 @@
+<head><title>maximum consecutive gap</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "maximum consecutive gap"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int Solution::maximumGap(const vector&lt;int> &A) {
+    if (A.size() &lt; 2)
+        return 0;
+    int n = A.size(), res = 0;
+    double mini = *min_element(A.begin(), A.end()),
+           maxi = *max_element(A.begin(), A.end());
+    if (maxi == mini)
+        return 0;
+    vector&lt;int> low(n + 1, -1), high(n + 1, -1);
+    for (int num : A) {
+        int idx = (int)floor((num - mini) / (maxi - mini) * n);
+        if (low[idx] == -1) {
+            low[idx] = num;
+            high[idx] = num;
+        } else {
+            low[idx] = min(num, low[idx]);
+            high[idx] = max(num, high[idx]);
+        }
+    }
+    int pre = high[0];
+    for (int i = 1; i &lt;= n; i++) {
+        if (low[i] != -1) {
+            if (pre != -1) {
+                res = max(res, low[i] - pre);
+            }
+            pre = high[i];
+        }
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

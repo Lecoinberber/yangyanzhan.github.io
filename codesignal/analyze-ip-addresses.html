@@ -1,0 +1,116 @@
+<head><title>analyze ip addresses</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "analyze ip addresses"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;algorithm>
+#include &lt;dirent.h>
+#include &lt;fstream>
+#include &lt;iostream>
+#include &lt;jsoncpp/json/json.h>
+#include &lt;regex>
+#include &lt;set>
+#include &lt;sys/stat.h>
+#include &lt;sys/types.h>
+#include &lt;unistd.h>
+#include &lt;vector>
+using namespace std;
+bool is_dir(const char *path) {
+    struct stat path_stat;
+    stat(path, &path_stat);
+    return S_ISDIR(path_stat.st_mode);
+}
+void list_dir(string root_path, vector&lt;string> &files) {
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir(root_path.c_str())) != NULL) {
+        while ((ent = readdir(dir)) != NULL) {
+            string path(ent->d_name);
+            if (path == "." || path == "..") {
+                continue;
+            }
+            path = root_path + "/" + path;
+            if (is_dir(path.c_str())) {
+                list_dir(path, files);
+            } else {
+                files.push_back(path);
+            }
+        }
+        closedir(dir);
+    }
+}
+int main() {
+    set&lt;string> ips;
+    regex reg("(\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)");
+    vector&lt;string> files;
+    list_dir("/root", files);
+    for (auto file : files) {
+        ifstream in(file);
+        string line;
+        while (in >> line) {
+            for (auto it = sregex_iterator(line.begin(), line.end(), reg);
+                 it != sregex_iterator(); it++) {
+                if (it->size() != 5) {
+                    continue;
+                }
+                bool valid = true;
+                for (int i = 1; i &lt;= 4; i++) {
+                    string item = (*it)[i].str();
+                    if (item.size() > 3) {
+                        valid = false;
+                        break;
+                    }
+                    int num = stoi(item);
+                    if (num != 0 && item[0] == '0') {
+                        valid = false;
+                        break;
+                    }
+                    if (!(0 &lt;= num && num <= 255)) {
+                        valid = false;
+                        break;
+                    }
+                }
+                if (!valid) {
+                    continue;
+                }
+                string ip = it->str();
+                ips.insert(ip);
+            }
+        }
+    }
+    for (auto ip : ips) {
+        cout &lt;< ip << endl;
+    }
+    return 0;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

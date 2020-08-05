@@ -1,0 +1,57 @@
+<head><title>strings crossover</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "strings crossover"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int stringsCrossover(std::vector&lt;std::string> inputArray, std::string result) {
+    using namespace std;
+    int res = 0;
+    for (int i1 = 0; i1 &lt; inputArray.size(); i1++) {
+        for (int i2 = i1 + 1; i2 &lt; inputArray.size(); i2++) {
+            string s1 = inputArray[i1], s2 = inputArray[i2];
+            bool valid = true;
+            for (int i = 0; i &lt; result.size(); i++) {
+                if ((result[i] == s1[i]) || (result[i] == s2[i])) {
+                } else {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                res++;
+            }
+        }
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

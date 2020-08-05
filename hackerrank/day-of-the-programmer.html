@@ -1,0 +1,65 @@
+<head><title>day of the programmer</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "day of the programmer"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">string dayOfProgrammer(int year) {
+    vector&lt;int> days_of_month = {0,  31, 28, 31, 30, 31, 30,
+                                 31, 31, 30, 31, 30, 31};
+    int remains = 256;
+    int month = 0, day = 0;
+    bool is_lunar;
+    if (year &lt; 1918) {
+        is_lunar = year % 4 == 0;
+    } else {
+        is_lunar = (year % 400 == 0) || (year % 100 != 0 && year % 4 == 0);
+    }
+    if (is_lunar) {
+        days_of_month[2] = 29;
+    }
+    if (year == 1918) {
+        days_of_month[2] = 15;
+    }
+    for (int i = 1; i &lt;= 12; i++) {
+        if (remains &lt;= days_of_month[i]) {
+            month = i;
+            day = remains;
+            break;
+        }
+        remains -= days_of_month[i];
+    }
+    char buffer[11];
+    sprintf(buffer, "%02d.%02d.%04d", day, month, year);
+    return buffer;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/hackerrank" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

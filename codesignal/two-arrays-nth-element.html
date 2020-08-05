@@ -1,0 +1,65 @@
+<head><title>two arrays nth element</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "two arrays nth element"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int twoArraysNthElement(std::vector&lt;int> array1, std::vector<int> array2,
+                        int n) {
+    using namespace std;
+    int i1 = 0, i2 = 0, i = -1, n1 = array1.size(), n2 = array2.size(), res;
+    while (i1 &lt; n1 && i2 < n2 && i < n) {
+        int num1 = array1[i1];
+        int num2 = array2[i2];
+        if (num1 &lt;= num2) {
+            i1++;
+            res = num1;
+        } else {
+            i2++;
+            res = num2;
+        }
+        i++;
+    }
+    while (i &lt; n) {
+        if (i1 &lt; n1) {
+            res = array1[i1];
+            i1++;
+            i++;
+        } else if (i2 &lt; n2) {
+            res = array2[i2];
+            i2++;
+            i++;
+        }
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

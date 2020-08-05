@@ -1,0 +1,54 @@
+<head><title>offload your work</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "offload your work"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;sstream>
+using namespace std;
+std::string workNeeded(int projectMinutes,
+                       std::vector&lt;std::pair<int, int>> freelancers) {
+    int p = projectMinutes;
+    for (auto lancer : freelancers) {
+        int m = get&lt;0>(lancer) * 60 + get<1>(lancer);
+        if (p &lt;= m) {
+            return "Easy Money!";
+        }
+        p -= m;
+    }
+    stringstream ss;
+    int h = p / 60;
+    int m = p % 60;
+    ss &lt;< "I need to work " << h << " hour(s) and " << m << " minute(s)";
+    return ss.str();
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codewars" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

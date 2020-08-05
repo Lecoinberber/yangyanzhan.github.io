@@ -1,0 +1,60 @@
+<head><title>chess clock sum of digits</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "chess clock sum of digits"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int stot(std::string str) {
+    using namespace std;
+    return (str[0] - '0') * 60 + stoi(str.substr(2, 2));
+}
+int ttosum(int t) {
+    int min = t / 60, sec = t % 60;
+    return min + sec / 10 + sec % 10;
+}
+std::vector&lt;int> chessClockSumOfDigits(std::vector<std::string> initialTime,
+                                       int k) {
+    using namespace std;
+    int a = stot(initialTime[0]), b = stot(initialTime[1]);
+    int mini = numeric_limits&lt;int>::max(), maxi = numeric_limits<int>::min();
+    for (int i = 0; i &lt;= min(a, k); i++) {
+        int a1 = a - i;
+        for (int j = 0; j &lt;= min(b, k - i); j++) {
+            int b1 = b - j;
+            int sum = ttosum(a1) + ttosum(b1);
+            mini = min(mini, sum);
+            maxi = max(maxi, sum);
+        }
+    }
+    return {max(mini, 1), maxi};
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

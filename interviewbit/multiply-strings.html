@@ -1,0 +1,107 @@
+<head><title>multiply strings</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "multiply strings"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">string multiply1(string A, int b) {
+    int carry = 0;
+    stringstream ss;
+    for (int i = A.length() - 1; i >= 0; i--) {
+        int a = A[i] - '0';
+        int num = a * b + carry;
+        ss &lt;< (num % 10);
+        carry = num / 10;
+    }
+    if (carry) {
+        ss &lt;< carry;
+    }
+    string res = ss.str();
+    reverse(res.begin(), res.end());
+    return res;
+}
+string add(string A, string B) {
+    int i = A.length() - 1, j = B.length() - 1, carry = 0;
+    stringstream ss;
+    while (i >= 0 && j >= 0) {
+        int digit = (A[i] - '0') + (B[j] - '0') + carry;
+        ss &lt;< (digit % 10);
+        carry = digit / 10;
+        i--;
+        j--;
+    }
+    while (i >= 0) {
+        int digit = (A[i] - '0') + carry;
+        ss &lt;< (digit % 10);
+        carry = digit / 10;
+        i--;
+    }
+    while (j >= 0) {
+        int digit = (B[j] - '0') + carry;
+        ss &lt;< (digit % 10);
+        carry = digit / 10;
+        j--;
+    }
+    if (carry) {
+        ss &lt;< carry;
+    }
+    string res = ss.str();
+    reverse(res.begin(), res.end());
+    return res;
+}
+string trim(string A) {
+    int i;
+    for (i = 0; i &lt; A.length(); i++) {
+        if (A[i] != '0') {
+            break;
+        }
+    }
+    if (i == A.length())
+        return "0";
+    return A.substr(i);
+}
+string Solution::multiply(string A, string B) {
+    vector&lt;string> nums;
+    for (int i = B.length() - 1; i >= 0; i--) {
+        string num = multiply1(A, B[i] - '0');
+        for (int j = B.length() - 1; j > i; j--) {
+            num += "0";
+        }
+        nums.push_back(num);
+    }
+    string res = nums[0];
+    for (int i = 1; i &lt; nums.size(); i++) {
+        res = add(res, nums[i]);
+    }
+    return trim(res);
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

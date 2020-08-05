@@ -1,0 +1,60 @@
+<head><title>is binary search tree</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "is binary search tree"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+<li>Binary trees are already defined with this interface:</li>
+<li>template<typename T></li>
+<li>struct Tree {</li>
+<li>Tree(const T &v) : value(v), left(nullptr), right(nullptr) {}</li>
+<li>T value;</li>
+<li>Tree *left;</li>
+<li>Tree *right;</li>
+<li>};</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">bool is_binary(Tree&lt;int> *tree, int mini, int maxi) {
+    using namespace std;
+    if (!tree) {
+        return true;
+    }
+    if (tree->value &lt;= mini || tree->value >= maxi) {
+        return false;
+    }
+    return is_binary(tree->left, mini, tree->value) &&
+           is_binary(tree->right, tree->value, maxi);
+}
+bool isBinarySearchTree(Tree&lt;int> *tree) {
+    using namespace std;
+    return is_binary(tree, numeric_limits&lt;int>::min(),
+                     numeric_limits&lt;int>::max());
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

@@ -1,0 +1,71 @@
+<head><title>credit card issuer checking</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "credit card issuer checking"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;algorithm>
+#include &lt;map>
+#include &lt;tuple>
+std::string getIssuer(const std::string &number) {
+    using namespace std;
+    map&lt;string, tuple<vector<string>, vector<int>>> cache;
+    cache["AMEX"] = make_tuple(vector&lt;string>{"34", "37"}, vector<int>{15});
+    cache["Discover"] = make_tuple(vector&lt;string>{"6011"}, vector<int>{16});
+    cache["Mastercard"] = make_tuple(
+        vector&lt;string>{"51", "52", "53", "54", "55"}, vector<int>{16});
+    cache["VISA"] = make_tuple(vector&lt;string>{"4"}, vector<int>{13, 16});
+    for (auto pair : cache) {
+        string vendor = pair.first;
+        auto checks = pair.second;
+        auto checks1 = get&lt;0>(checks);
+        auto checks2 = get&lt;1>(checks);
+        int n = number.size();
+        if (find(checks2.begin(), checks2.end(), n) == checks2.end()) {
+            continue;
+        }
+        bool valid = false;
+        for (auto item : checks1) {
+            int m = item.size();
+            string head = number.substr(0, m);
+            if (head == item) {
+                valid = true;
+                break;
+            }
+        }
+        if (valid) {
+            return vendor;
+        }
+    }
+    return "Unknown";
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codewars" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

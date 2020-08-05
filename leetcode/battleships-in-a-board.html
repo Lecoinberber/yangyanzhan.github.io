@@ -1,0 +1,72 @@
+<head><title>battleships in a board</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "battleships in a board"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">class Solution {
+  public:
+    int countBattleships(vector&lt;vector<char>> &board) {
+        int res = 0;
+        int m = board.size(), n = board[0].size();
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                if (board[i][j] != 'X') {
+                    continue;
+                } else {
+                    res++;
+                    board[i][j] = 'O';
+                    bool is_row = false;
+                    for (int j1 = j + 1; j1 &lt; n; j1++) {
+                        if (board[i][j1] != 'X') {
+                            break;
+                        } else {
+                            board[i][j1] = 'O';
+                            is_row = true;
+                        }
+                    }
+                    if (!is_row) {
+                        for (int i1 = i + 1; i1 &lt; m; i1++) {
+                            if (board[i1][j] != 'X') {
+                                break;
+                            } else {
+                                board[i1][j] = 'O';
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+};
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/leetcode" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

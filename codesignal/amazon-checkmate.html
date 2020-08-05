@@ -1,0 +1,168 @@
+<head><title>amazon checkmate</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "amazon checkmate"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">bool can_place1(int x, int y, int kx, int ky, int ax, int ay) {
+    if (!(0 &lt;= x && x < 8 && 0 <= y && y < 8)) {
+        return false;
+    }
+    if (x == ax && y == ay) {
+        return false;
+    }
+    for (int i = -1; i &lt;= 1; i++) {
+        for (int j = -1; j &lt;= 1; j++) {
+            if (x == kx + i && y == ky + j) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+bool can_place2(int x, int y, int kx, int ky) {
+    if (!(0 &lt;= x && x < 8 && 0 <= y && y < 8)) {
+        return false;
+    }
+    for (int i = -1; i &lt;= 1; i++) {
+        for (int j = -1; j &lt;= 1; j++) {
+            if (x == kx + i && y == ky + j) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+bool is_attacked(int x, int y, int kx, int ky, int ax, int ay) {
+    for (int dx = -1; dx &lt;= 1; dx++) {
+        for (int dy = -1; dy &lt;= 1; dy++) {
+            for (int step = 1; step &lt;= 8; step++) {
+                int tx = dx * step + ax;
+                int ty = dy * step + ay;
+                if (!(0 &lt;= tx && tx < 8 && 0 <= ty && ty < 8)) {
+                    break;
+                }
+                if (tx == kx && ty == ky) {
+                    break;
+                }
+                if (tx == x && ty == y) {
+                    return true;
+                }
+            }
+        }
+    }
+    for (auto dx : vector&lt;int>{-2, -1, 1, 2}) {
+        int dyabs = 3 - abs(dx);
+        for (auto dy : vector&lt;int>{-dyabs, dyabs}) {
+            int tx = dx + ax;
+            int ty = dy + ay;
+            if (tx == x && ty == y) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+std::vector&lt;int> amazonCheckmate(std::string king, std::string amazon) {
+    using namespace std;
+    int kx = king[0] - 'a', ky = king[1] - '1';
+    int ax = amazon[0] - 'a', ay = amazon[1] - '1';
+    int checkmate = 0, check = 0, stalemate = 0, safe = 0;
+    for (int x = 0; x &lt; 8; x++) {
+        for (int y = 0; y &lt; 8; y++) {
+            if (!can_place1(x, y, kx, ky, ax, ay)) {
+                continue;
+            }
+            if (is_attacked(x, y, kx, ky, ax, ay)) {
+                bool found = false;
+                for (int dx = -1; dx &lt;= 1; dx++) {
+                    for (int dy = -1; dy &lt;= 1; dy++) {
+                        if (dx == 0 && dy == 0) {
+                            continue;
+                        }
+                        int tx = x + dx;
+                        int ty = y + dy;
+                        if (tx == ax && ty == ay &&
+                            can_place2(tx, ty, kx, ky)) {
+                            found = true;
+                            break;
+                        }
+                        if (can_place1(tx, ty, kx, ky, ax, ay) &&
+                            !is_attacked(tx, ty, kx, ky, ax, ay)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
+                }
+                if (found) {
+                    check++;
+                } else {
+                    checkmate++;
+                }
+            } else {
+                bool found = false;
+                for (int dx = -1; dx &lt;= 1; dx++) {
+                    for (int dy = -1; dy &lt;= 1; dy++) {
+                        if (dx == 0 && dy == 0) {
+                            continue;
+                        }
+                        int tx = x + dx;
+                        int ty = y + dy;
+                        if (tx == ax && ty == ay &&
+                            can_place2(tx, ty, kx, ky)) {
+                            found = true;
+                            break;
+                        }
+                        if (can_place1(tx, ty, kx, ky, ax, ay) &&
+                            !is_attacked(tx, ty, kx, ky, ax, ay)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
+                }
+                if (found) {
+                    safe++;
+                } else {
+                    stalemate++;
+                }
+            }
+        }
+    }
+    return {checkmate, check, stalemate, safe};
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

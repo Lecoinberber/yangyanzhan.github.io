@@ -1,0 +1,66 @@
+<head><title>rotated sorted array search</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "rotated sorted array search"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int getPivot(const vector&lt;int> &nums) {
+    int n = nums.size(), begin = 0, end = n - 1;
+    while (end - begin > 1) {
+        int middle = (begin + end) / 2;
+        if (nums[middle] > nums[begin]) {
+            begin = middle;
+        } else {
+            end = middle;
+        }
+    }
+    return end;
+}
+int Solution::search(const vector&lt;int> &A, int B) {
+    int pivot = getPivot(A), begin, end, n = A.size();
+    if (B >= A[0]) {
+        begin = 0, end = pivot - 1;
+    } else {
+        begin = pivot, end = n - 1;
+    }
+    while (begin &lt;= end) {
+        int middle = (begin + end) / 2;
+        if (A[middle] == B)
+            return middle;
+        if (A[middle] &lt; B)
+            begin = middle + 1;
+        else
+            end = middle - 1;
+    }
+    return -1;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

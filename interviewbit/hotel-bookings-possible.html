@@ -1,0 +1,70 @@
+<head><title>hotel bookings possible</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "hotel bookings possible"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">struct Event {
+    int time;
+    int action;
+    Event(int time, int action) : time(time), action(action) {}
+    bool operator&lt;(const Event &event) const {
+        if (time == event.time) {
+            return action > 0;
+        }
+        return time &lt; event.time;
+    }
+};
+bool Solution::hotel(vector&lt;int> &arrive, vector<int> &depart, int K) {
+    sort(arrive.begin(), arrive.end());
+    sort(depart.begin(), depart.end());
+    long long n = arrive.size(), i = 0, j = 0;
+    long long maxTime = 1000000000000000000;
+    while (i &lt; n || j < n) {
+        long long a = maxTime, b = maxTime;
+        if (i &lt; n)
+            a = arrive[i];
+        if (j &lt; n)
+            b = depart[j];
+        if (b &lt;= a) {
+            K++;
+            j++;
+        } else {
+            K--;
+            i++;
+        }
+        if (K &lt; 0)
+            return false;
+    }
+    return true;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

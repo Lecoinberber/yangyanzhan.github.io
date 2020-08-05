@@ -1,0 +1,55 @@
+<head><title>gray code</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "gray code"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">vector&lt;int> Solution::grayCode(int A) {
+    vector&lt;int> res;
+    if (A == 0) {
+        return res;
+    } else if (A == 1) {
+        return vector&lt;int>{0, 1};
+    } else {
+        vector&lt;int> nextCodes = grayCode(A - 1);
+        for (vector&lt;int>::iterator it = nextCodes.begin();
+             it != nextCodes.end(); it++) {
+            res.push_back(*it);
+        }
+        for (vector&lt;int>::reverse_iterator it = nextCodes.rbegin();
+             it != nextCodes.rend(); it++) {
+            res.push_back((1 &lt;< (A - 1)) + *it);
+        }
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

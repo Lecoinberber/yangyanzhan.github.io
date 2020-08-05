@@ -1,0 +1,105 @@
+<head><title>parking spot</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "parking spot"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">bool parkingSpotFromLeft(std::vector&lt;int> &carDimensions,
+                         std::vector&lt;std::vector<int>> &parkingLot,
+                         std::vector&lt;int> &luckySpot) {
+    using namespace std;
+    int len = carDimensions[0], width = carDimensions[1];
+    int x1 = luckySpot[0], y1 = luckySpot[1], x2 = luckySpot[2],
+        y2 = luckySpot[3];
+    if ((x2 - x1 + 1 &lt; width) || (y2 - y1 + 1 < len)) {
+        return false;
+    }
+    int y3 = y1;
+    for (int x3 = x1; x3 + width - 1 &lt;= x2; x3++) {
+        bool valid = true;
+        for (int i = x3; i &lt; x3 + width; i++) {
+            for (int j = 0; j &lt; y3 + len; j++) {
+                if (parkingLot[i][j] != 0) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (!valid) {
+                break;
+            }
+        }
+        if (valid) {
+            return true;
+        }
+    }
+    return false;
+}
+std::vector&lt;std::vector<int>>
+rotateMatrix(std::vector&lt;std::vector<int>> &matrix) {
+    using namespace std;
+    int h = matrix.size(), w = matrix[0].size(), oh = w, ow = h;
+    vector&lt;vector<int>> rotated;
+    for (int i = 0; i &lt; oh; i++) {
+        vector&lt;int> row;
+        for (int j = 0; j &lt; ow; j++) {
+            row.push_back(matrix[h - 1 - j][i]);
+        }
+        rotated.push_back(row);
+    }
+    return rotated;
+}
+std::vector&lt;int> rotateRect(std::vector<int> &rect, int h, int w) {
+    using namespace std;
+    int x1 = rect[0], y1 = rect[1], x2 = rect[2], y2 = rect[3], oh = w, ow = h;
+    int x3 = x2, y3 = y1, x4 = x1, y4 = y2;
+    int x5 = y3;
+    int y5 = h - 1 - x3;
+    int x6 = y4;
+    int y6 = h - 1 - x4;
+    vector&lt;int> rotated{x5, y5, x6, y6};
+    return rotated;
+}
+bool parkingSpot(std::vector&lt;int> carDimensions,
+                 std::vector&lt;std::vector<int>> parkingLot,
+                 std::vector&lt;int> luckySpot) {
+    using namespace std;
+    for (int i = 0; i &lt; 4; i++) {
+        if (parkingSpotFromLeft(carDimensions, parkingLot, luckySpot)) {
+            return true;
+        }
+        int h = parkingLot.size(), w = parkingLot[0].size();
+        parkingLot = rotateMatrix(parkingLot);
+        luckySpot = rotateRect(luckySpot, h, w);
+    }
+    return false;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

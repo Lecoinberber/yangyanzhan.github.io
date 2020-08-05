@@ -1,0 +1,73 @@
+<head><title>largest rectangle in histogram</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "largest rectangle in histogram"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int Solution::largestRectangleArea(vector&lt;int> &A) {
+    vector&lt;int> hist = A;
+    int n = A.size();
+    stack&lt;int> s;
+    int max_area = 0;  // Initalize max area
+    int tp;            // To store top of stack
+    int area_with_top; // To store area with top bar as the smallest bar
+    // Run through all bars of given histogram
+    int i = 0;
+    while (i &lt; n) {
+        // If this bar is higher than the bar on top stack, push it to stack
+        if (s.empty() || hist[s.top()] &lt;= hist[i])
+            s.push(i++);
+        // If this bar is lower than top of stack, then calculate area of rectangle
+        // with stack top as the smallest (or minimum height) bar. 'i' is
+        // 'right index' for the top and element before top in stack is 'left index'
+        else {
+            tp = s.top(); // store the top index
+            s.pop();      // pop the top
+            // Calculate the area with hist[tp] stack as smallest bar
+            area_with_top = hist[tp] * (s.empty() ? i : i - s.top() - 1);
+            // update max area, if needed
+            if (max_area &lt; area_with_top)
+                max_area = area_with_top;
+        }
+    }
+    // Now pop the remaining bars from stack and calculate area with every
+    // popped bar as the smallest bar
+    while (s.empty() == false) {
+        tp = s.top();
+        s.pop();
+        area_with_top = hist[tp] * (s.empty() ? i : i - s.top() - 1);
+        if (max_area &lt; area_with_top)
+            max_area = area_with_top;
+    }
+    return max_area;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

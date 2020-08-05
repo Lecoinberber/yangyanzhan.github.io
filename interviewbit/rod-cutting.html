@@ -1,0 +1,75 @@
+<head><title>rod cutting</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "rod cutting"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">void makeCuts(vector&lt;vector<pair<long long, int>>> &cache, vector<int> &B,
+              int i, int j, vector&lt;int> &cuts) {
+    if (i + 1 >= j) {
+        return;
+    }
+    int k = cache[i][j].second;
+    cuts.push_back(B[k]);
+    makeCuts(cache, B, i, k, cuts);
+    makeCuts(cache, B, k, j, cuts);
+}
+vector&lt;int> Solution::rodCut(int A, vector<int> &B) {
+    B.insert(B.begin(), 0);
+    B.push_back(A);
+    int n = B.size();
+    vector&lt;vector<pair<long long, int>>> cache(n,
+                                               vector&lt;pair<long long, int>>(n));
+    for (int i = 0; i &lt; n; i++) {
+        cache[i][i] = pair&lt;long long, int>(0, i);
+    }
+    for (int i = 0; i &lt; n - 1; i++) {
+        cache[i][i + 1] = pair&lt;long long, int>(0, i);
+    }
+    for (int len = 2; len &lt; n; len++) {
+        for (int i = 0, j = len; j &lt; n; i++, j++) {
+            long long bestCost = LLONG_MAX, bestCut;
+            for (int k = i + 1; k &lt;= j - 1; k++) {
+                long long cost = cache[i][k].first + cache[k][j].first;
+                if (cost &lt; bestCost) {
+                    bestCost = cost;
+                    bestCut = k;
+                }
+            }
+            cache[i][j] = pair&lt;long long, int>(bestCost + B[j] - B[i], bestCut);
+        }
+    }
+    vector&lt;int> cuts;
+    makeCuts(cache, B, 0, n - 1, cuts);
+    return cuts;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

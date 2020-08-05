@@ -1,0 +1,83 @@
+:not([class*="highlight-code"]):not(h1):not(h2):not(h3):not(a):not(.no-highlight-background) {
+    color: #cad9d9;
+    background-color: #424242;
+    font-size: x-large;
+}
+
+.highlight-code {
+    font-size: xx-large;
+}
+
+body {
+    padding: 10px;
+}
+
+h1 {
+    color: #8ed1fc;
+    font-size: xxx-large;
+}
+
+h2 {
+    color: #8ed1fc;
+    font-size: xx-large;
+}
+
+h3 {
+    color: #8ed1fc;
+    font-size: x-large;
+}
+
+a {
+    color: #80ced6;
+}
+
+.yanzhan-hidden {
+    display: none;
+}
+
+.yanzhan-show {
+    display: block;
+    animation: fade_in_show 0.5s
+}
+
+@keyframes fade_in_show {
+     0% {
+          opacity: 0;
+     }
+     100% {
+          opacity: 1;
+     }
+}
+
+.video-wrapper {
+    width: 80%;
+    height: 50%;
+    margin: 0 auto;
+}
+
+.video-item {
+    width: 100%;
+    height: 100%;
+}
+
+.no-highlight-background {
+    padding: 5px;
+    color: #839496;
+    background: #002b36;
+}
+
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+hr {
+    border: 3px solid #323232;
+}
+
+li {
+    margin-bottom: 10px;
+}

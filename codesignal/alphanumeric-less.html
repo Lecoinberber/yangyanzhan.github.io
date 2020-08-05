@@ -1,0 +1,104 @@
+<head><title>alphanumeric less</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "alphanumeric less"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;regex>
+std::vector&lt;std::string> split(std::string s) {
+    using namespace std;
+    vector&lt;string> res;
+    regex reg("(\\d+)|([^\\d]+)");
+    for (auto it = sregex_iterator(s.begin(), s.end(), reg);
+         it != sregex_iterator(); it++) {
+        string item = it->str();
+        res.push_back(item);
+    }
+    return res;
+}
+bool is_number(std::string s) {
+    using namespace std;
+    for (auto ch : s) {
+        if (ch &lt; '0' || ch > '9') {
+            return false;
+        }
+    }
+    return true;
+}
+bool alphanumericLess(std::string s1, std::string s2) {
+    using namespace std;
+    vector&lt;string> list1 = split(s1);
+    vector&lt;string> list2 = split(s2);
+    int n = min(list1.size(), list2.size());
+    for (int i = 0; i &lt; n; i++) {
+        string item1 = list1[i];
+        string item2 = list2[i];
+        if (is_number(item1) && is_number(item2)) {
+            string tmp1;
+            regex_replace(back_inserter(tmp1), item1.begin(), item1.end(),
+                          regex("^0+"), "");
+            if (tmp1.size() == 0) {
+                tmp1 = "0";
+            }
+            string tmp2;
+            regex_replace(back_inserter(tmp2), item2.begin(), item2.end(),
+                          regex("^0+"), "");
+            if (tmp2.size() == 0) {
+                tmp2 = "0";
+            }
+            if (tmp1.size() != tmp2.size()) {
+                return tmp1.size() &lt; tmp2.size();
+            } else {
+                if (tmp1 != tmp2) {
+                    return tmp1 &lt; tmp2;
+                }
+            }
+        } else if (is_number(item1) || is_number(item2)) {
+            return is_number(item1);
+        } else {
+            if (item1 != item2) {
+                return item1 &lt; item2;
+            }
+        }
+    }
+    if (list1.size() == list2.size()) {
+        for (int i = 0; i &lt; n; i++) {
+            string item1 = list1[i];
+            string item2 = list2[i];
+            if (item1.size() != item2.size()) {
+                return item1.size() > item2.size();
+            }
+        }
+    }
+    return list1.size() &lt; list2.size();
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

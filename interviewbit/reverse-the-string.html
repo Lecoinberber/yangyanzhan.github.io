@@ -1,0 +1,63 @@
+<head><title>reverse the string</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "reverse the string"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">string Solution::solve(string A) {
+    vector&lt;string> words;
+    int n = A.length();
+    string pre = "";
+    for (int i = 0; i &lt; n; i++) {
+        char ch = A[i];
+        if (ch == ' ') {
+            if (pre.length() > 0) {
+                words.push_back(pre);
+            }
+            pre = "";
+        } else {
+            pre += ch;
+        }
+    }
+    if (pre.length() > 0) {
+        words.push_back(pre);
+    }
+    A = "";
+    for (int i = words.size() - 1; i >= 0; i--) {
+        A += words[i];
+        if (i > 0) {
+            A += " ";
+        }
+    }
+    return A;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

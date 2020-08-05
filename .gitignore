@@ -1,0 +1,5 @@
+.DS_Store
+.config
+_site
+my-config.pm6
+source

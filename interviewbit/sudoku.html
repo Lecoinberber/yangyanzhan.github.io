@@ -1,0 +1,90 @@
+<head><title>sudoku</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "sudoku"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">vector&lt;set<int>> regions(9), rows(9), columns(9);
+int getRegionId(int i, int j) { return (i / 3) * 3 + (j / 3); }
+bool traverse(vector&lt;vector<int>> remains, vector<int> &nums) {
+    if (remains.size() &lt;= 0)
+        return true;
+    int i = remains[0][0], j = remains[0][1], regionId = getRegionId(i, j);
+    set&lt;int> &row = rows[i], &column = columns[j], &region = regions[regionId];
+    remains.erase(remains.begin());
+    for (int num = 1; num &lt;= 9; num++) {
+        if ((region.find(num) != region.end()) ||
+            (row.find(num) != row.end()) ||
+            (column.find(num) != column.end())) {
+            continue;
+        }
+        row.insert(num);
+        column.insert(num);
+        region.insert(num);
+        nums.push_back(num);
+        if (traverse(remains, nums)) {
+            return true;
+        }
+        nums.pop_back();
+        row.erase(num);
+        column.erase(num);
+        region.erase(num);
+    }
+    return false;
+}
+void Solution::solveSudoku(vector&lt;vector<char>> &A) {
+    for (int i = 0; i &lt; 9; i++) {
+        regions[i] = set&lt;int>();
+        rows[i] = set&lt;int>();
+        columns[i] = set&lt;int>();
+    }
+    vector&lt;vector<int>> remains;
+    vector&lt;int> nums;
+    for (int i = 0; i &lt; 9; i++) {
+        for (int j = 0; j &lt; 9; j++) {
+            char ch = A[i][j];
+            if (isdigit(ch)) {
+                int num = ch - '0';
+                rows[i].insert(num);
+                columns[j].insert(num);
+                regions[getRegionId(i, j)].insert(num);
+            } else {
+                remains.push_back(vector&lt;int>{i, j});
+            }
+        }
+    }
+    traverse(remains, nums);
+    for (int k = 0; k &lt; remains.size(); k++) {
+        A[remains[k][0]][remains[k][1]] = nums[k] + '0';
+    }
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

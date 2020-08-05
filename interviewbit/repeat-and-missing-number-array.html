@@ -1,0 +1,57 @@
+<head><title>repeat and missing number array</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "repeat and missing number array"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">vector&lt;int> Solution::repeatedNumber(const vector<int> &A) {
+    int n = A.size();
+    long long sum = 0, sum2 = 0;
+    long long total = n, total2 = n;
+    total = total * (n + 1) / 2;
+    total2 = total2 * (n + 1) * (2 * n + 1) / 6;
+    for (int i = 0; i &lt; n; i++) {
+        int num = A[i];
+        sum = sum + num;
+        sum2 = sum2 + (long long)(num)*num;
+    }
+    long long b_a = total - sum;
+    long long b_a2 = total2 - sum2;
+    long long b_add_a = b_a2 / b_a;
+    int a = (b_add_a - b_a) / 2;
+    int b = (b_a + b_add_a) / 2;
+    vector&lt;int> res;
+    res.push_back(a);
+    res.push_back(b);
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

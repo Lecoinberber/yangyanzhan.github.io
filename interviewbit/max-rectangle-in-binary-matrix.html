@@ -1,0 +1,100 @@
+<head><title>max rectangle in binary matrix</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "max rectangle in binary matrix"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int R;
+int C;
+int maxHist(vector&lt;int> &row) {
+    // Create an empty stack. The stack holds indexes of
+    // hist[] array/ The bars stored in stack are always
+    // in increasing order of their heights.
+    stack&lt;int> result;
+    int top_val; // Top of stack
+    int max_area = 0; // Initialize max area in current
+                      // row (or histogram)
+    int area = 0; // Initialize area with current top
+    // Run through all bars of given histogram (or row)
+    int i = 0;
+    while (i &lt; C) {
+        // If this bar is higher than the bar on top stack,
+        // push it to stack
+        if (result.empty() || row[result.top()] &lt;= row[i])
+            result.push(i++);
+        else {
+            // If this bar is lower than top of stack, then
+            // calculate area of rectangle with stack top as
+            // the smallest (or minimum height) bar. 'i' is
+            // 'right index' for the top and element before
+            // top in stack is 'left index'
+            top_val = row[result.top()];
+            result.pop();
+            area = top_val * i;
+            if (!result.empty())
+                area = top_val * (i - result.top() - 1);
+            max_area = max(area, max_area);
+        }
+    }
+    // Now pop the remaining bars from stack and calculate area
+    // with every popped bar as the smallest bar
+    while (!result.empty()) {
+        top_val = row[result.top()];
+        result.pop();
+        area = top_val * i;
+        if (!result.empty())
+            area = top_val * (i - result.top() - 1);
+        max_area = max(area, max_area);
+    }
+    return max_area;
+}
+// Returns area of the largest rectangle with all 1s in A[][]
+int Solution::maximalRectangle(vector&lt;vector<int>> &A) {
+    R = A.size();
+    C = A[0].size();
+    // Calculate area for first row and initialize it as
+    // result
+    int result = maxHist(A[0]);
+    // iterate over row to find maximum rectangular area
+    // considering each row as histogram
+    for (int i = 1; i &lt; R; i++) {
+        for (int j = 0; j &lt; C; j++)
+            // if A[i][j] is 1 then add A[i -1][j]
+            if (A[i][j])
+                A[i][j] += A[i - 1][j];
+        // Update result if area with current row (as last row)
+        // of rectangle) is more
+        result = max(result, maxHist(A[i]));
+    }
+    return result;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

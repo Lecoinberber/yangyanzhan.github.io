@@ -1,0 +1,123 @@
+<head><title>compare version numbers</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "compare version numbers"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">string trim(string num) {
+    int i;
+    for (i = 0; i &lt; num.length(); i++) {
+        if (num[i] != '0') {
+            break;
+        }
+    }
+    if (i == num.length()) {
+        return "0";
+    } else {
+        return num.substr(i);
+    }
+}
+vector&lt;string> toNums(string A) {
+    A += ".";
+    string pre;
+    vector&lt;string> res;
+    for (int i = 0; i &lt; A.length(); i++) {
+        char ch = A[i];
+        if (ch == '.') {
+            res.push_back(trim(pre));
+            pre = "";
+        } else {
+            pre += ch;
+        }
+    }
+    return res;
+}
+vector&lt;string> trim(vector<string> nums) {
+    vector&lt;string> res = nums;
+    for (int i = nums.size() - 1; i >= 0; i--) {
+        if (res[i] != "0") {
+            break;
+        } else {
+            res.erase(res.begin() + i);
+        }
+    }
+    if (res.size() &lt;= 0) {
+        res.push_back("0");
+    }
+    return res;
+}
+bool operator&lt;(const string A, const string B) {
+    int n = A.length(), m = B.length();
+    if (n != m) {
+        return n &lt; m;
+    }
+    for (int i = 0; i &lt; n; i++) {
+        if (A[i] &lt; B[i]) {
+            return true;
+        } else if (A[i] > B[i]) {
+            return false;
+        }
+    }
+    return false;
+}
+bool operator>(const string A, const string B) {
+    int n = A.length(), m = B.length();
+    if (n != m) {
+        return n > m;
+    }
+    for (int i = 0; i &lt; n; i++) {
+        if (A[i] > B[i]) {
+            return true;
+        } else if (A[i] &lt; B[i]) {
+            return false;
+        }
+    }
+    return false;
+}
+int Solution::compareVersion(string A, string B) {
+    vector&lt;string> nums1 = trim(toNums(A)), nums2 = trim(toNums(B));
+    for (int i = 0; i &lt; min(nums1.size(), nums2.size()); i++) {
+        if (nums1[i] &lt; nums2[i]) {
+            return -1;
+        } else if (nums1[i] > nums2[i]) {
+            return 1;
+        }
+    }
+    if (nums1.size() &lt; nums2.size()) {
+        return -1;
+    } else if (nums1.size() > nums2.size()) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

@@ -1,0 +1,58 @@
+<head><title>halloween sale</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "halloween sale"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int howManyGames(long long p, long long d, long long m, long long s) {
+    if (s &lt; p) {
+        return 0;
+    }
+    long long c1 = (p - m) / d + 1;
+    long long t1 = (p + (p - (c1 - 1) * d)) * c1 / 2;
+    if (s &lt;= t1) {
+        long long total = 0, count = 0;
+        for (int i = 1; i &lt;= c1; i++) {
+            total += p;
+            if (total > s) {
+                break;
+            }
+            count++;
+            p -= d;
+            p = max(p, m);
+        }
+        return count;
+    } else {
+        return c1 + (s - t1) / m;
+    }
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/hackerrank" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

@@ -1,0 +1,85 @@
+<head><title>area of intersection</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "area of intersection"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int areaOfIntersection(std::vector&lt;int> shape1, std::vector<int> shape2) {
+    using namespace std;
+    int n1 = shape1[0], x1 = shape1[1], y1 = shape1[2];
+    int n2 = shape2[0], x2 = shape2[1], y2 = shape2[2];
+    int res = 0;
+    for (int dx = -1; dx &lt;= 1; dx++) {
+        if (dx == 0) {
+            continue;
+        }
+        for (int dy = -1; dy &lt;= 1; dy++) {
+            if (dy == 0) {
+                continue;
+            }
+            for (int x3 = 1; x3 &lt; n1; x3++) {
+                for (int y3 = 1; y3 &lt; n1 - x3; y3++) {
+                    int x = x1 + dx * x3;
+                    int y = y1 + dy * y3;
+                    int dist = abs(x - x2) + abs(y - y2);
+                    if (dist &lt; n2) {
+                        res++;
+                    }
+                }
+            }
+        }
+    }
+    for (int x = x1 - n1 + 1; x &lt;= x1 + n1 - 1; x++) {
+        if (x == x1) {
+            continue;
+        }
+        int dist = abs(x - x2) + abs(y1 - y2);
+        if (dist &lt; n2) {
+            res++;
+        }
+    }
+    for (int y = y1 - n1 + 1; y &lt;= y1 + n1 - 1; y++) {
+        if (y == y1) {
+            continue;
+        }
+        int dist = abs(x1 - x2) + abs(y - y2);
+        if (dist &lt; n2) {
+            res++;
+        }
+    }
+    int dist = abs(x1 - x2) + abs(y1 - y2);
+    if (dist &lt; n2) {
+        res++;
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

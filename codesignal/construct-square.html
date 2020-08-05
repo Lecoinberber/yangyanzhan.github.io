@@ -1,0 +1,78 @@
+<head><title>construct square</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "construct square"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">std::vector&lt;int> format(std::string s) {
+    map&lt;char, int> mapping;
+    for (int i = 0; i &lt; s.length(); i++) {
+        char ch = s[i];
+        if (mapping.find(ch) == mapping.end()) {
+            mapping[ch] = 0;
+        }
+        mapping[ch]++;
+    }
+    vector&lt;int> res;
+    for (auto it : mapping) {
+        res.push_back(it.second);
+    }
+    sort(res.begin(), res.end());
+    return res;
+}
+int constructSquare(std::string s) {
+    using namespace std;
+    int top = ceil(sqrt(pow(10, s.length())));
+    int bottom = floor(sqrt(pow(10, s.length() - 1) - 1));
+    vector&lt;int> vs = format(s);
+    for (int num = top; num >= bottom; num--) {
+        long long res = num;
+        res *= res;
+        stringstream ss;
+        ss &lt;< res;
+        string t = ss.str();
+        vector&lt;int> vt = format(t);
+        if (vs.size() == vt.size()) {
+            bool equal = true;
+            for (int i = 0; i &lt; vs.size(); i++) {
+                if (vs[i] != vt[i]) {
+                    equal = false;
+                    break;
+                }
+            }
+            if (equal)
+                return res;
+        }
+    }
+    return -1;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

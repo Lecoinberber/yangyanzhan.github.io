@@ -1,0 +1,69 @@
+<head><title>3 sum zero</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "3 sum zero"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">string getKey(int i, int j, int k, vector&lt;int> &A) {
+    stringstream ss;
+    ss &lt;< A[i] << " " << A[j] << " " << A[k];
+    return ss.str();
+}
+vector&lt;vector<int>> Solution::threeSum(vector<int> &A) {
+    set&lt;string> seen;
+    sort(A.begin(), A.end());
+    int n = A.size();
+    vector&lt;vector<int>> res;
+    for (int i = 0; i &lt; n - 2; i++) {
+        int begin = i + 1, end = n - 1;
+        while (begin &lt; end) {
+            long long sum = A[i];
+            sum += A[begin];
+            sum += A[end];
+            if (sum == 0) {
+                string key = getKey(i, begin, end, A);
+                if (seen.find(key) == seen.end()) {
+                    seen.insert(key);
+                    res.push_back(vector&lt;int>{A[i], A[begin], A[end]});
+                }
+                begin++;
+                end--;
+            } else if (sum &lt; 0) {
+                begin++;
+            } else {
+                end--;
+            }
+        }
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

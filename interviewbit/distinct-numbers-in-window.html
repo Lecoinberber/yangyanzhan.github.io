@@ -1,0 +1,65 @@
+<head><title>distinct numbers in window</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "distinct numbers in window"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">vector&lt;int> Solution::dNums(vector<int> &A, int B) {
+    int n = A.size();
+    vector&lt;int> res;
+    if (n &lt; B) {
+        return res;
+    }
+    map&lt;int, int> cache;
+    for (int i = 0; i &lt; B; i++) {
+        int num = A[i];
+        if (cache.find(num) == cache.end()) {
+            cache[num] = 0;
+        }
+        cache[num]++;
+    }
+    res.push_back(cache.size());
+    for (int i = 1; i &lt;= n - B; i++) {
+        int pre = A[i - 1], now = A[B + i - 1];
+        cache[pre]--;
+        if (cache.find(now) == cache.end()) {
+            cache[now] = 0;
+        }
+        cache[now]++;
+        if (cache[pre] == 0) {
+            cache.erase(pre);
+        }
+        res.push_back(cache.size());
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

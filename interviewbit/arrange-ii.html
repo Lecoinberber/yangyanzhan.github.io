@@ -1,0 +1,80 @@
+<head><title>arrange ii</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "arrange ii"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">int product(string A) {
+    //cout&lt;<A<<endl;
+    int i, n = A.length();
+    int w = 0, b = 0;
+    for (i = 0; i &lt; n; i++) {
+        if (A[i] == 'W')
+            w++;
+        else
+            b++;
+    }
+    //printf("%d %d\n",w,b);
+    return w * b;
+}
+long long answer(string A, int l, int k, int **a);
+int memoize(string A, int l, int k, int **a) {
+    if (a[l][k] >= 0)
+        return a[l][k];
+    a[l][k] = (int)answer(A, l, k, a);
+    return a[l][k];
+}
+long long answer(string A, int l, int k, int **a) {
+    long long ans = INT_MAX;
+    int r = A.length();
+    if (k == 0) {
+        return (long long)(product(A.substr(l, r - l)));
+    }
+    for (int i = l; i &lt; r - k; i++) {
+        ans = min(ans, (long long)product(A.substr(l, i - l + 1)) +
+                           (long long)memoize(A, i + 1, k - 1, a));
+        //printf("%d %d %lld\n",k,i,ans);
+    }
+    return ans;
+}
+int Solution::arrange(string A, int B) {
+    if (B > A.length())
+        return -1;
+    int **a = new int *[A.length()];
+    for (int i = 0; i &lt; A.length(); i++)
+        a[i] = new int[B];
+    for (int i = 0; i &lt; A.length(); i++)
+        for (int j = 0; j &lt; B; j++)
+            a[i][j] = -1;
+    return (int)answer(A, 0, B - 1, a);
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/interviewbit" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

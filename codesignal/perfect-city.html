@@ -1,0 +1,59 @@
+<head><title>perfect city</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "perfect city"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">bool is_int(double num) { return num == floor(num); }
+double perfectCity(std::vector&lt;double> departure,
+                   std::vector&lt;double> destination) {
+    using namespace std;
+    double a1 = departure[0], b1 = departure[1], a2 = destination[0],
+           b2 = destination[1];
+    if ((is_int(a1) && !is_int(a2)) || (!is_int(a1) && is_int(a2))) {
+        return abs(a1 - a2) + abs(b1 - b2);
+    }
+    if (is_int(a1) && is_int(a2)) {
+        swap(a1, b1);
+        swap(a2, b2);
+    }
+    double a3 = min(a1, a2), a4 = max(a1, a2);
+    double res = 0;
+    if (a4 >= floor(a3) + 1) {
+        res = a4 - a3;
+    } else {
+        res = min(a3 + a4 - 2 * floor(a3), 2 * ceil(a3) - a3 - a4);
+    }
+    res += abs(b1 - b2);
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

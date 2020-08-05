@@ -1,0 +1,81 @@
+<head><title>exercise elaboration</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "exercise elaboration"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">std::vector&lt;int> mul(std::vector<int> n1, std::vector<int> n2) {
+    using namespace std;
+    vector&lt;int> res(n1.size() + n2.size(), 0);
+    for (int j = n2.size() - 1; j >= 0; j--) {
+        int d2 = n2[j];
+        for (int i = n1.size() - 1; i >= 0; i--) {
+            int d1 = n1[i];
+            int d = d1 * d2;
+            res[n2.size() - 1 - j + n1.size() - 1 - i] += d;
+        }
+    }
+    reverse(res.begin(), res.end());
+    int carry = 0;
+    for (int i = res.size() - 1; i >= 0; i--) {
+        res[i] += carry;
+        carry = res[i] / 10;
+        res[i] %= 10;
+    }
+    return res;
+}
+int exerciseElaboration(int p, int n) {
+    using namespace std;
+    vector&lt;int> num;
+    int tmp = p;
+    while (tmp > 0) {
+        int d = tmp % 10;
+        num.insert(num.begin(), d);
+        tmp /= 10;
+    }
+    for (int i = 1; i &lt;= min(n, 100); i++) {
+        num.insert(num.begin(), 0);
+    }
+    tmp = p;
+    while (tmp > 0) {
+        int d = tmp % 10;
+        num.insert(num.begin(), d);
+        tmp /= 10;
+    }
+    vector&lt;int> num2 = mul(num, num);
+    int res = 0;
+    for (auto d : num2) {
+        res += d;
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codesignal" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

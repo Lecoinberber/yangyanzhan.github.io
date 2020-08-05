@@ -1,0 +1,57 @@
+<head><title>100 doors</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Other Raku Contributors' solution for "100 doors"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>For this specific algothmic problem, visit my Youtube Video : <a href="https://youtu.be/LKSMZIB8hhw" target=_blank>[https://youtu.be/LKSMZIB8hhw]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+<li>Disclaimer: this solution is quoted from Rosetta Code, for more solutions and code snippets, please visit Rosetta Code Website : <a href="http://rosettacode.org/wiki/Rosetta_Code" target=_blank>[http://rosettacode.org/wiki/Rosetta_Code]</a> . Thanks for the great work done by Rosetta maintainers and contributors, I could make video tutorials for Rosetta.</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+            <h3>
+                video tutorial:
+            </h3>
+            <div class="video-wrapper yanzhan-hidden">
+                <iframe class="video-item" src="https://www.youtube.com/embed/LKSMZIB8hhw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+        
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden no-highlight-background">sub solution1() {
+    my @doors = False xx 101;
+    (.=not for @doors[0, $_ ... 100]) for 1..100;
+    say "Door $_ is ", &lt;closed open>[ @doors[$_] ] for 1..100;
+}
+sub solution2() {
+    say "Door $_ is open" for map {$^n ** 2}, 1..10;
+}
+sub solution3() {
+    say "Door $_ is ", &lt;closed open>[.sqrt == .sqrt.floor] for 1..100;
+}
+solution1;
+solution2;
+solution3;
+</pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/rosetta" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>
