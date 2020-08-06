@@ -1,19 +1,23 @@
-<head><title>dominant point</title>
+<head><title>recursive string</title>
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
 <script src="/third-party/highlight/highlight.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<h2>Yanzhan's solution for "dominant point"</h2>
+<h2>Yanzhan's solution for "recursive string"</h2>
 <ul>
 <li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
 <li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
 </ul>
 
-            <div>
-            </div>
-        
+        <h3>
+            description:
+        </h3>
+        <div style="border: dotted; padding: 10px;">
+            Consider the following function. Given two integers N and K, find the K^{th} character in the string returned by f(N).
+        </div>
+    
 
             <div>
             </div>
@@ -55,41 +59,48 @@
 #include &lt;exception>
 using namespace std;
 typedef long long ll;
+map&lt;ll, ll> cache = {{0, 1}, {1, 1}, {2, 1}};
+ll walk(ll n) {
+    if (n &lt;= 2) {
+        return 1;
+    }
+    if (cache.find(n) != cache.end()) {
+        return cache[n];
+    }
+    ll n1 = n - 1, n2 = n - 2, n3 = n - 3;
+    ll l1 = walk(n1);
+    ll l2 = walk(n2);
+    ll l3 = walk(n3);
+    ll l = l1 + l2 + l3;
+    cache[n] = l;
+    return l;
+}
+string run(ll n, ll k) {
+    if (n == 0) {
+        return k == 1 ? "a" : "-1";
+    } else if (n == 1) {
+        return k == 1 ? "b" : "-1";
+    } else if (n == 2) {
+        return k == 1 ? "c" : "-1";
+    }
+    ll n1 = n - 1, n2 = n - 2, n3 = n - 3;
+    ll l1 = cache[n1], l2 = cache[n2], l3 = cache[n3];
+    if (k &lt;= l1) {
+        return run(n1, k);
+    } else if (k &lt;= l1 + l2) {
+        return run(n2, k - l1);
+    } else if (k &lt;= l1 + l2 + l3) {
+        return run(n3, k - l1 - l2);
+    } else {
+        return "-1";
+    }
+}
 int main() {
     ios::sync_with_stdio(false);
-    int n;
-    cin >> n;
-    vector&lt;vector<int>> coords(n);
-    int maxi_x = numeric_limits&lt;int>::min();
-    int cnt_x = 0;
-    int idx_x = -1;
-    int maxi_y = numeric_limits&lt;int>::min();
-    int cnt_y = 0;
-    int idx_y = -1;
-    for (int i = 0; i &lt; n; i++) {
-        int x, y;
-        cin >> x >> y;
-        coords[i] = vector&lt;int>{x, y};
-        if (x > maxi_x) {
-            maxi_x = x;
-            cnt_x = 1;
-            idx_x = i;
-        } else if (x == maxi_x) {
-            cnt_x++;
-        }
-        if (y > maxi_y) {
-            maxi_y = y;
-            cnt_y = 1;
-            idx_y = i;
-        } else if (y == maxi_y) {
-            cnt_y++;
-        }
-    }
-    if (cnt_x == 1 && cnt_y == 1 && idx_x == idx_y) {
-        cout &lt;< (idx_x + 1) << endl;
-    } else {
-        cout &lt;< -1 << endl;
-    }
+    ll n, k;
+    cin >> n >> k;
+    walk(n);
+    cout &lt;< run(n, k) << endl;
     return 0;
 }
 </code></pre>
