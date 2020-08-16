@@ -1,0 +1,68 @@
+<head><title>correct the time string</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "correct the time string"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">using namespace std;
+#include &lt;iomanip>
+#include &lt;sstream>
+std::string correct(std::string timeString) {
+    bool v1 = isdigit(timeString[0]);
+    bool v2 = isdigit(timeString[1]);
+    bool v3 = timeString[2] == ':';
+    bool v4 = isdigit(timeString[3]);
+    bool v5 = isdigit(timeString[4]);
+    bool v6 = timeString[5] == ':';
+    bool v7 = isdigit(timeString[6]);
+    bool v8 = isdigit(timeString[7]);
+    if (!v1 || !v2 || !v3 || !v4 || !v5 || !v6 || !v7 || !v8) {
+        return "";
+    }
+    int a = stoi(timeString.substr(0, 2));
+    int b = stoi(timeString.substr(3, 2));
+    int c = stoi(timeString.substr(6, 2));
+    b += c / 60;
+    c %= 60;
+    a += b / 60;
+    b %= 60;
+    a %= 24;
+    stringstream ss;
+    ss &lt;< setw(2) << setfill('0');
+    ss &lt;< a << ":";
+    ss &lt;< setw(2) << setfill('0');
+    ss &lt;< b << ":";
+    ss &lt;< setw(2) << setfill('0');
+    ss &lt;< c;
+    return ss.str();
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codewars" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

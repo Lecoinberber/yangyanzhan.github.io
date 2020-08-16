@@ -1,0 +1,68 @@
+<head><title>simple directions reversal</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "simple directions reversal"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">using namespace std;
+string t_b = "Begin on ";
+string t_r = "Right on ";
+string t_l = "Left on ";
+vector&lt;string> extract(string item) {
+    vector&lt;string> tokens = {t_b, t_r, t_l};
+    int idx = string::npos;
+    for (auto token : tokens) {
+        idx = item.find(token);
+        if (idx != string::npos) {
+            return {token, item.substr(idx + token.size())};
+        }
+    }
+    return {};
+}
+std::vector&lt;std::string> solve(std::vector<std::string> v) {
+    vector&lt;vector<string>> items;
+    vector&lt;string> res;
+    string pre_dir = t_b;
+    for (int i = v.size() - 1; i >= 0; i--) {
+        auto items = extract(v[i]);
+        string dir = t_b;
+        if (pre_dir == t_r) {
+            dir = t_l;
+        } else if (pre_dir == t_l) {
+            dir = t_r;
+        }
+        res.push_back(dir + items[1]);
+        pre_dir = items[0];
+    }
+    return res;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codewars" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>

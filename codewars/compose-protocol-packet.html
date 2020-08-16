@@ -1,0 +1,52 @@
+<head><title>compose protocol packet</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "compose protocol packet"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">#include &lt;cstdio>
+unsigned char crc8(const unsigned char *pc_block, unsigned int len);
+int compose_packet(unsigned char *packet, unsigned int id_number,
+                   unsigned char state, unsigned long long int scenario_mask,
+                   unsigned int volume, unsigned int status) {
+    if (id_number > 0xFFFF || state > 0x7F || scenario_mask > 0xFFFFFFFFFFFF ||
+        volume > 999999 || status &lt; 0xFF || status > 0xFFFF) {
+        return -1;
+    }
+    packet[0] = 0x2;
+    snprintf((char *)packet + 1, 30, "%04X%02X%012llX%06d%04X", id_number,
+             state, scenario_mask, volume, status);
+    packet[29] = 0x3;
+    packet[30] = crc8(packet + 1, 28);
+    return 1;
+}
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/codewars" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>
