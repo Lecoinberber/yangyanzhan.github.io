@@ -1,0 +1,92 @@
+<head><title>merge k sorted lists</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<link rel="stylesheet" href="/third-party/highlight/solarized-dark.css">
+<script src="/third-party/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<h2>Yanzhan's solution for "merge k sorted lists"</h2>
+<ul>
+<li>Hi, I'm Yanzhan. For more algothmic problems, visit my Youtube Channel <a href="https://www.youtube.com/channel/UCDkz-__gl3frqLexukpG0DA?view_as=subscriber" target=_blank>[Yanzhan Yang's Youtube Channel]</a> or my Twitter Account <a href="https://twitter.com/YangYanzhan" target=_blank>[Yanzhan Yang's Twitter]</a> or my GitHub HomePage <a href="https://github.com/yangyanzhan/code-camp" target=_blank>[Yanzhan Yang's GitHub Project]</a> .</li>
+<li>It's fascinating to solve algothmic problems, follow Yanzhan to learn more!</li>
+</ul>
+
+            <div>
+            </div>
+        
+
+            <div>
+            </div>
+        
+
+        <div>
+        </div>
+    
+
+        <h3>
+            solution:
+        </h3>
+    
+<pre class="yanzhan-hidden"><code class="c++">using namespace std;
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+  public:
+    ListNode *mergeKLists(vector&lt;ListNode *> &lists) {
+        if (lists.size() == 0) {
+            return nullptr;
+        }
+        if (lists.size() == 1) {
+            return lists[0];
+        }
+        if (lists.size() == 2) {
+            return merge2Lists(lists[0], lists[1]);
+        }
+        vector&lt;ListNode *> lists1, lists2;
+        for (int i = 0; i &lt; lists.size() / 2; i++) {
+            lists1.push_back(lists[i]);
+        }
+        for (int i = lists.size() / 2; i &lt; lists.size(); i++) {
+            lists2.push_back(lists[i]);
+        }
+        auto res1 = mergeKLists(lists1);
+        auto res2 = mergeKLists(lists2);
+        return merge2Lists(res1, res2);
+    }
+    ListNode *merge2Lists(ListNode *h1, ListNode *h2) {
+        ListNode *head = new ListNode(), *curr = head;
+        while (h1 && h2) {
+            if (h1->val &lt;= h2->val) {
+                curr->next = h1;
+                curr = curr->next;
+                h1 = h1->next;
+            } else {
+                curr->next = h2;
+                curr = curr->next;
+                h2 = h2->next;
+            }
+        }
+        if (h1) {
+            curr->next = h1;
+        }
+        if (h2) {
+            curr->next = h2;
+        }
+        return head->next;
+    }
+};
+</code></pre>
+<ul class="yanzhan-hidden">
+<li><a href="/index.html" target=_blank>[Go Back To HomePage]</a></li>
+<li><a href="/leetcode" target=_blank>[Go Back To Solution List Page]</a></li>
+</ul>
+<script src="/main.js"></script>
+</body>
